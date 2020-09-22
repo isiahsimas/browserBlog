@@ -1,1 +1,12 @@
 @import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css');
+
+
+.navbar-nav.navbar-right:last-child {
+    margin-right: 0;
+}
+
+article#items{
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
