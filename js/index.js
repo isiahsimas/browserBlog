@@ -5,6 +5,16 @@ import aPages from "../pages/index.js";
 import aItems from "../items/index.js";
 
 class Page {
+    constructor(){
+        this.sName = "Isiah Simas";
+        const sBase = document.location.pathname;
+        if(sBase[sBase.length - 1] == "/"){
+            this.sBase = sBase.substr(0, sBase.length -1);
+        }else{
+            const sFile = '/' + document.location.pathname.split('/').pop();
+            this.sBase = sBase.substr(0, sBase.length - sFile.length); 
+        }
+    }
     render() {
         console.log("render called on page");
     }
@@ -25,9 +35,9 @@ class Items extends Page{
     }
     render(){
         $("article#current").append(`
-            <img src="${this.oItems[this.nCurrentItem].specialImage}" />
+            <img src="${this.sBase + this.oItems[this.nCurrentItem].specialImage}" />
         `);
-        $.get(`/items/${this.oItems[this.nCurrentItem].fname}`, (sMarkdown) => {
+        $.get(`${this.sBase}/items/${this.oItems[this.nCurrentItem].fname}`, (sMarkdown) => {
             $("article#current").append(
                 marked(sMarkdown)
             )
@@ -37,7 +47,7 @@ class Items extends Page{
             if(n != this.nCurrentItem){
                 $("article#items").append(`
                 <div class="item"><a class="itemLink" href="#">
-                <img id="item${n}" src="${this.oItems[n].specialImage}" /></a></div>
+                <img id="item${n}" src="${this.sBase + this.oItems[n].specialImage}" /></a></div>
                 `);
            }
         }
@@ -53,10 +63,10 @@ class Section extends Page {
     render() {
         if (this.oOptions.specialImage) {
             $(`#${this.oOptions.title}`).append(`
-            <img src="${this.oOptions.specialImage}" />
+            <img src="${this.sBase + this.oOptions.specialImage}" />
             `);
         }
-        $.get(`/pages/${this.oOptions.fname}`, (sMarkdown) => {
+        $.get(`${this.sBase}/pages/${this.oOptions.fname}`, (sMarkdown) => {
             $(`#${this.oOptions.title}`).append(
                 marked(sMarkdown)
             )
@@ -76,13 +86,11 @@ class Article extends Page {
     }
 }
 
-const sName = "Isiah Simas";
-
 class Footer extends Page {
     render() {
         const yToday = new Date().getFullYear();
         $("footer").html(
-            `&copy; ${yToday} ${sName}`
+            `&copy; ${yToday} ${this.sName}`
         );
     }
 }
@@ -106,7 +114,7 @@ class Nav extends Page {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Portfolio of ${sName}</a>
+                <a class="navbar-brand" href="#">Portfolio of ${this.sName}</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
