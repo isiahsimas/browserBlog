@@ -76,7 +76,7 @@ class Article extends Page {
     }
 }
 
-const sName = "Richard Hildred";
+const sName = "Isiah Simas";
 
 class Footer extends Page {
     render() {
@@ -113,9 +113,7 @@ class Nav extends Page {
                     ${sMenu}
                 </ul>
             </div>
-
         </div>
-
         `);
     }
 }
