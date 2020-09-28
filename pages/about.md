@@ -1,1 +1,5 @@
-## This would be the about page
+## Skills
+
+• Systems Analysis and Design<br>
+• C#<br>
+• Unity

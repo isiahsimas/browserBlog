@@ -131,14 +131,14 @@ class Portfolio extends Page {
         super();
         this.header = new Page();
         this.nav = new Nav();
-        this.items = new Items(aItems);
+        //this.items = new Items(aItems);
         this.article = new Article();
         this.footer = new Footer();
     }
     render() {
         this.header.render();
         this.nav.render();
-        this.items.render();
+        //this.items.render();
         this.article.render();
         this.footer.render();
     }
